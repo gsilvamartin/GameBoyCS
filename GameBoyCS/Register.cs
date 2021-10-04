@@ -8,6 +8,6 @@ namespace GameBoyCS
     {
         public ushort m, t;
         public ushort pc, sp;
-        public byte a, b, c, d, e, f;
+        public byte a, b, c, d, e, h, l;
     }
 }

@@ -4,9 +4,8 @@ using System.Text;
 
 namespace GameBoyCS
 {
-    public class CPU
+    public struct Clock
     {
-        public Clock clock;
-        public Register register;
+        public ushort m, t;
     }
 }
