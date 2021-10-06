@@ -73,5 +73,41 @@ namespace GameBoyCS
             get => (f & 0x10) != 0;
             set { f = value ? (byte)(f | 0x10) : (byte)(f & ~0x10); }
         }
+
+        public bool GetFlagZResult(int b)
+        {
+            return b == 0;
+        }
+
+        public bool GetFlagCResult(int i)
+        {
+            return (i >> 8) != 0;
+        }
+
+        public bool GetFlagHResult(byte v1, byte v2)
+        {
+            return ((v1 & 0xF) + (v2 & 0xF)) > 0xF;
+        }
+
+        public bool GetFlagHResult(ushort v1, ushort v2)
+        {
+            return ((v1 & 0xFFF) + (v2 & 0xFFF)) > 0xFFF;
+        }
+
+        public bool GetFlagCarry(byte v1, byte v2)
+        {
+            return ((v1 & 0xF) + (v2 & 0xF)) >= 0xF;
+        }
+
+        public bool GetFlagHSub(byte v1, byte v2)
+        {
+            return (v1 & 0xF) < (v2 & 0xF);
+        }
+
+        public bool GetFlagHSubCarry(byte v1, byte b2)
+        {
+            int carry = FlagC ? 1 : 0;
+            return (v1 & 0xF) < ((b2 & 0xF) + carry);
+        }
     }
 }
