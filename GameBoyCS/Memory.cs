@@ -18,12 +18,17 @@ namespace GameBoyCS
             memory = new byte[65536];
         }
 
-        public byte ReadByte(ushort address)
+        public void Add(ushort address, ushort value_address)
+        {
+            memory[address] += memory[value_address];
+        }
+
+        public byte LoadByte(ushort address)
         {
             return memory[address];
         }
 
-        public ushort ReadShort(ushort address)
+        public ushort LoadShort(ushort address)
         {
             return (ushort)(memory[address] | memory[address + 1] << 8);
         }
@@ -47,6 +52,16 @@ namespace GameBoyCS
         public void Decrement(ushort address, byte value)
         {
             memory[address] -= value;
+        }
+
+        public byte RotateLeftByte(byte value, byte count)
+        {
+            return (byte)(value << count | value >> (8 - count));
+        }
+
+        public byte RotateRightByte(byte value, byte count)
+        {
+            return (byte)(value >> count | value << (8 - count));
         }
     }
 }
