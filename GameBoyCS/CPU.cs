@@ -41,12 +41,12 @@ namespace GameBoyCS
 
         private void LD_BC_D16()
         {
-            memory.WriteShort(register.BC, memory.ReadShort(register.pc));
+            memory.WriteShort(register.BC, memory.LoadShort(register.pc));
         }
 
         private void LD_BC_A()
         {
-            memory.WriteByte(register.BC, memory.ReadByte(register.a));
+            memory.WriteByte(register.BC, memory.LoadByte(register.a));
         }
 
         private void INC_BC()
@@ -65,6 +65,23 @@ namespace GameBoyCS
         }
 
         private void LD_B_D8()
+        {
+            memory.WriteByte(register.b, memory.LoadByte(register.pc));
+        }
+
+        private void RLCA()
+        {
+            register.f = 0;
+            register.FlagC = (register.a & 0x80) != 0;
+            register.a = memory.RotateLeftByte(register.a, 8);
+        }
+
+        private void LD_A16_SP()
+        {
+            memory.WriteShort(memory.LoadShort(register.pc), register.sp);
+        }
+
+        private void ADD_HL_BC()
         {
 
         }
