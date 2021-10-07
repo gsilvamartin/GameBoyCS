@@ -6,6 +6,7 @@ namespace GameBoyCS
 {
     public struct Register
     {
+        #region Register Variables
         public ushort m, t;
         public ushort pc, sp;
         public byte a, b, c, d, e, f, h, l;
@@ -49,7 +50,9 @@ namespace GameBoyCS
                 l = (byte)(value & 0x00ff); //LOW 8 BITS
             }
         }
+        #endregion
 
+        #region Register Flags
         public bool FlagZ
         {
             get => (f & 0x80) != 0;
@@ -73,7 +76,9 @@ namespace GameBoyCS
             get => (f & 0x10) != 0;
             set { f = value ? (byte)(f | 0x10) : (byte)(f & ~0x10); }
         }
+        #endregion
 
+        #region Flag Methods
         public bool GetFlagZResult(int b)
         {
             return b == 0;
@@ -109,5 +114,6 @@ namespace GameBoyCS
             int carry = FlagC ? 1 : 0;
             return (v1 & 0xF) < ((b2 & 0xF) + carry);
         }
+        #endregion
     }
 }
